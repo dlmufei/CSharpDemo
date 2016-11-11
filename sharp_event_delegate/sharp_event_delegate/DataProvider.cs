@@ -11,8 +11,12 @@ namespace sharp_event_delegate
         public delegate void RefreshHandler(int data);
 
         public event RefreshHandler Refresh;
+        public event RefreshHandler Refresh100;
+        public event RefreshHandler Refresh200;
 
-        private Thread threadRevData = null; 
+        private Thread threadRevData100 = null;
+        private Thread threadRevData200 = null; 
+
 
         public DataProvider() 
         {
@@ -21,11 +25,29 @@ namespace sharp_event_delegate
 
         public DataProvider(int code)
         {
-            threadRevData = new Thread(getData);
-            threadRevData.Start();
-        } 
+            threadRevData100 = new Thread(getData100);
+            threadRevData100.Start();
+            threadRevData200 = new Thread(getData200);
+            threadRevData200.Start();
+        }
 
         public void getData()
+        {
+            int index = 0;
+
+            while (index < 100000)
+            {
+                if (index % 100 == 0)
+                {
+                    Refresh(index);
+                }
+
+                index++;
+                Thread.Sleep(10);
+            }
+        }
+
+        public void getData100()
         {
             int index = 0;
 
@@ -33,12 +55,29 @@ namespace sharp_event_delegate
             {
                 if (index % 100 == 0)
                 {
-                    Refresh(index);  
+                    Refresh100(index);  
                 }
+                
+                index++;
+                Thread.Sleep(10);
+            }            
+        }
+
+        public void getData200()
+        {
+            int index = 0;
+
+            while (index < 100000)
+            {
+                if (index % 200 == 0)
+                {
+                    Refresh200(index);
+                }
+
                 index++;
                 Thread.Sleep(10);
             }
-            
+
         }
 
 

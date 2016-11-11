@@ -37,7 +37,14 @@ namespace sharp_event_delegate
             dataProvider = new DataProvider();
             dataProvider.Refresh += refreshMethod01;
             dataProvider.getData();
+        }
 
+
+        private void btnDataThread_Click(object sender, EventArgs e)
+        {
+            dataProvider = new DataProvider(1);
+            dataProvider.Refresh100 += refreshMethod100;
+            dataProvider.Refresh200 += refreshMethod200;
         }
 
         private void refreshMethod01(int index)
@@ -65,23 +72,30 @@ namespace sharp_event_delegate
         /// 第二种实现跨线程更新UI的方法
         /// </summary>
         /// <param name="index"></param>
-        private void refreshMethod04(int index)
+        private void refreshMethod100(int index)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new DataProvider.RefreshHandler(refreshMethod04), new object[] { index });
+                this.Invoke(new DataProvider.RefreshHandler(refreshMethod100), new object[] { index });
             }
             else 
             {
-                txtDisplay.Text = "Data: " + index;
+                txtDisplay.Text = "Data100: " + index;
             } 
         }
 
-        private void btnDataThread_Click(object sender, EventArgs e)
-        {            
-            dataProvider = new DataProvider(1);
-            dataProvider.Refresh += refreshMethod04;
+        private void refreshMethod200(int index)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new DataProvider.RefreshHandler(refreshMethod200), new object[] { index });
+            }
+            else
+            {
+                txtDisplay200.Text = "Data200: " + index;
+            }
         }
+
 
         /*------------------------------------------------------------------------------*/
         //第二步：定义执行线程主体事件
@@ -97,7 +111,7 @@ namespace sharp_event_delegate
         }
         //第三步：定义执行UI更新事件
         //UI更新方法
-        public void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        public void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.txtDisplay.Text = e.UserState.ToString();
         }

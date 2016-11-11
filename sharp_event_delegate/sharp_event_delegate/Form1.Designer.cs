@@ -31,6 +31,7 @@
             this.btnStartDataProvider = new System.Windows.Forms.Button();
             this.btnDataThread = new System.Windows.Forms.Button();
             this.txtDisplay = new System.Windows.Forms.TextBox();
+            this.txtDisplay200 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnStartDataProvider
@@ -59,12 +60,22 @@
             this.txtDisplay.Name = "txtDisplay";
             this.txtDisplay.Size = new System.Drawing.Size(175, 21);
             this.txtDisplay.TabIndex = 2;
+            this.txtDisplay.Text = "100";
+            // 
+            // txtDisplay200
+            // 
+            this.txtDisplay200.Location = new System.Drawing.Point(75, 129);
+            this.txtDisplay200.Name = "txtDisplay200";
+            this.txtDisplay200.Size = new System.Drawing.Size(175, 21);
+            this.txtDisplay200.TabIndex = 3;
+            this.txtDisplay200.Text = "200";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 379);
+            this.Controls.Add(this.txtDisplay200);
             this.Controls.Add(this.txtDisplay);
             this.Controls.Add(this.btnDataThread);
             this.Controls.Add(this.btnStartDataProvider);
@@ -80,6 +91,7 @@
         private System.Windows.Forms.Button btnStartDataProvider;
         private System.Windows.Forms.Button btnDataThread;
         private System.Windows.Forms.TextBox txtDisplay;
+        private System.Windows.Forms.TextBox txtDisplay200;
     }
 }
 
